@@ -38,22 +38,6 @@ jobs:
           tags: edx
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
-
-  buildx_with_local_registry:
-    env:
-      DOCKER_BUILDKIT: '1'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - id: cache-docker
-        uses: actions/cache@v2
-        with:
-          path: /tmp/docker-registry
-          key: docker-registry-buildkit-${{ github.sha }}
-      - run: docker run -d -p 5000:5000 --restart=always --name registry -v /tmp/docker-registry:/var/lib/registry registry:2 && npx wait-on tcp:5000
-      - run: docker build . -t thing --cache-from=localhost:5000/thing --build-arg BUILDKIT_INLINE_CACHE=1
-      - run: docker tag thing localhost:5000/thing && docker push localhost:5000/thing || true
-        if: steps.cache.outputs.cache-hit != 'true'
   
   build_with_docker_registry-cache:
     runs-on: ubuntu-latest
@@ -74,4 +58,34 @@ jobs:
           push: true
           tags: github-actions-benchmark/edx-platform:latest
           cache-from: type=registry,ref=github-actions-benchmark/edx-platform:latest
+          cache-to: type=inline
+
+  build_with_local-registry-cache:
+    runs-on: ubuntu-latest
+    services:
+      registry:
+        image: registry:2
+        ports:
+          - 5000:5000
+    steps:
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          driver-opts: network=host
+      
+      - uses: actions/cache@v2
+        with:
+          path: /tmp/docker-registry
+          key: docker-registry-buildkit-${{ github.sha }}
+      -
+        name: Build and push to local registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: localhost:5000/github-actions-benchmark/edx-platform:latest
+          cache-from: type=registry,ref=localhost:5000/github-actions-benchmark/edx-platform:latest
           cache-to: type=inline
