@@ -92,7 +92,8 @@ jobs:
           ls
           cd ..
           ls
-          cd $HOME/tmp/registry
+          cd $HOME
+          ls
 
       -
         name: Build and push to local registry
