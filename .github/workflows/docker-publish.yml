@@ -89,10 +89,10 @@ jobs:
           key: docker-registry-buildkit-${{ github.sha }}
       
       - run: |
-        ls
-        cd tmp
-        ls
-        
+          ls
+          cd tmp
+          ls
+
       -
         name: Build and push to local registry
         uses: docker/build-push-action@v2
