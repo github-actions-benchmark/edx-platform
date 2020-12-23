@@ -94,7 +94,7 @@ jobs:
           ls
           cd $HOME
           ls
-          cd runner
+          cd runners
           ls
           cd tmp
 
