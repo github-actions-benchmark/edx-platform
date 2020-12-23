@@ -71,7 +71,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: .
           push: true
           tags: github-actions-benchmark/edx-platform:latest
           cache-from: type=registry,ref=github-actions-benchmark/edx-platform:latest
