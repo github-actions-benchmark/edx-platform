@@ -94,6 +94,9 @@ jobs:
           ls
           cd $HOME
           ls
+          cd runner
+          ls
+          cd tmp
 
       -
         name: Build and push to local registry
