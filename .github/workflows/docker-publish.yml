@@ -85,7 +85,8 @@ jobs:
       
       - uses: actions/cache@v2
         with:
-          path: **/registry
+          path: |
+            **/registry
           key: docker-registry-buildkit-${{ github.sha }}
 
       -
