@@ -85,6 +85,7 @@ jobs:
         name: Build and push to local registry
         uses: docker/build-push-action@v2
         with:
+          context: .
           push: true
           tags: localhost:5000/github-actions-benchmark/edx-platform:latest
           cache-from: type=registry,ref=localhost:5000/github-actions-benchmark/edx-platform:latest
