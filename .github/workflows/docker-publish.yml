@@ -85,7 +85,7 @@ jobs:
       
       - uses: actions/cache@v2
         with:
-          path: /tmp/registry
+          path: **/registry
           key: docker-registry-buildkit-${{ github.sha }}
 
       -
@@ -97,4 +97,3 @@ jobs:
           tags: localhost:5000/github-actions-benchmark/edx-platform:latest
           cache-from: type=registry,ref=localhost:5000/github-actions-benchmark/edx-platform:latest
           cache-to: type=inline
-          
