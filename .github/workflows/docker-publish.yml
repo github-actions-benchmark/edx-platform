@@ -73,6 +73,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: user/app:latest
-          cache-from: type=registry,ref=user/app:latest
+          tags: github-actions-benchmark/edx-platform:latest
+          cache-from: type=registry,ref=github-actions-benchmark/edx-platform:latest
           cache-to: type=inline
