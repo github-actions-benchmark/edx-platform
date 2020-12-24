@@ -97,3 +97,4 @@ jobs:
           tags: localhost:5000/ahdbilal/edx-platform:latest
           cache-from: type=registry,ref=localhost:5000/ahdbilal/edx-platform:latest
           cache-to: type=inline
+
