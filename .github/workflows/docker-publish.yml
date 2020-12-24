@@ -95,6 +95,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: localhost:5000/github-actions-benchmark/edx-platform:latest
-          cache-from: type=registry,ref=localhost:5000/github-actions-benchmark/edx-platform:latest
+          tags: localhost:5000/ahdbilal/edx-platform:latest
+          cache-from: type=registry,ref=localhost:5000/ahdbilal/edx-platform:latest
           cache-to: type=inline
